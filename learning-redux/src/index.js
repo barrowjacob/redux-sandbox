@@ -3,56 +3,38 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import {createStore} from 'redux';
+// ^ this creates the global state
+import rootReducer from './reducers';
+import {Provider} from 'react-redux';
+//connects global state AKA store to app
 
 //STORE
 //       this holds all the data for the application
-
-import {createStore} from 'redux';
-// ^ this creates the global state
-
+const store = createStore(
+    rootReducer,
+     window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+// ^ redux devtools is just an extension for chrome that allows you to see the states of various stores
 
 //ACTION
 //        simple function that returns an object -- describes what you want to do
 
 
-const increment = () => {
-    return {
-        type: 'INCREMENT'
-
-    }
-};
-
-const decrement = () => {
-    return {
-        type: 'DECREMENT'
-    }
-};
 //REDUCER
 //        describes how actions transform one state into another state
+// this can be placed in other files for clarity
 
-const counter = (state = 0, action) => {
-    // reducer takes in initial state, action
-    switch(action.type){
-        case "INCREMENT":
-            return state + 1;
-        case "DECREMENT":
-            return state - 1;
-    }
-};
-
-let store = createStore(counter);
-
-store.subscribe(() => console.log(store.getState()));
 //DISPATCH
 //        how you actually execute action
 
-store.dispatch(increment());
+// store.dispatch(increment());
 
 
 ReactDOM.render(
-  <React.StrictMode>
+    <Provider store={store}>
     <App />
-  </React.StrictMode>,
+    </Provider>,
   document.getElementById('root')
 );
 
