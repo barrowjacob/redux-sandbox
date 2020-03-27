@@ -13,8 +13,8 @@ function App() {
 
     <div className="App">
         <h1>Counter {counter}</h1>
-      <button onClick={() => dispatch(increment())}>+</button>
-      <button onClick={() => dispatch(decrement())}>-</button>
+      <button onClick={() => dispatch(increment(3))}>+</button>
+      <button onClick={() => dispatch(decrement(1))}>-</button>
         <button onClick={() => dispatch(logIn())}>Log In</button>
         <button onClick={() => dispatch(logOut())}>Log Out</button>
         {isLogged ? <h3>Valuable Information I shouldn't see...</h3> : ''}
